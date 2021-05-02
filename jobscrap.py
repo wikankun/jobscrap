@@ -95,6 +95,7 @@ def page_crawler(keyword):
         job_link = link['href'].strip().split('?', 1)[0]
         job_desc = job_page_scraper(job_link)
         if job_desc is not None:
+            job_desc = ['None' if v is None else v for v in job_desc]
             jobs.append([job_link] + job_desc)
 
     result_df = pd.DataFrame(jobs, columns = ['link', 'job_id', 'job_title', 'company', 'job_post_date', 'job_requirement_career_level', 'company_size', 'company_industry', 'job_description', 'job_employment_type', 'job_function'])
@@ -107,7 +108,7 @@ if __name__ == '__main__':
     for key in key_words:
         key_df = page_crawler(key)
         data_dict = key_df.to_dict("records")
-        url = "http://host.docker.internal:8000/jobs/"
-        headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-        r = requests.post(url, data=json.dumps(data_dict), headers=headers)
-        print(r)
+        url = "https://jobstreetscrap-api.herokuapp.com/jobs/?apiKey=1234567asdfgh"
+        headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
+        resp = requests.post(url, data=json.dumps(data_dict), headers=headers)
+        print(resp.json())
