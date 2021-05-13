@@ -104,6 +104,9 @@ def page_crawler(keyword):
 if __name__ == '__main__':
     # a list of job roles to be crawled
     key_words = ['data engineer']
+    # check if the time is between 00.00 and 01.00
+    if time.gmtime().tm_hour >= 1:
+        return
 
     for key in key_words:
         key_df = page_crawler(key)
@@ -112,3 +115,5 @@ if __name__ == '__main__':
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
         resp = requests.post(url, data=json.dumps(data_dict), headers=headers)
         print(resp.json())
+        
+    driver.quit()
