@@ -9,6 +9,7 @@ import requests
 import time
 import json
 import math
+import sys
 
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
@@ -76,7 +77,7 @@ def page_crawler(keyword):
 
     # get total page number
     # page_number = get_page_number(keyword)
-    page_number = 1
+    page_number = 2
     job_links = []
 
     for n in range(page_number):
@@ -103,10 +104,10 @@ def page_crawler(keyword):
 
 if __name__ == '__main__':
     # a list of job roles to be crawled
-    key_words = ['data engineer']
+    key_words = ['data engineer', 'data analyst']
     # check if the time is between 00.00 and 01.00
     if time.gmtime().tm_hour >= 1:
-        return
+        sys.exit()
 
     for key in key_words:
         key_df = page_crawler(key)
