@@ -2,7 +2,7 @@
 
 Jobstreet Scrapping Application
 
-# How to build docker image
+## How to build docker image
 
 From jobscrap directory run:
 
